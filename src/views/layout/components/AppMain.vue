@@ -1,20 +1,16 @@
 <template>
   <section>
     <transition name="fade">
-      <router-view></router-view>
+      <router-view />
     </transition>
   </section>
 </template>
-
 <script>
   export default {
     name: 'AppMain',
-    computed: {
-
-    }
+    computed: {}
   }
 </script>
-
 <style>
   .fade-enter-active,
   .fade-leave-active {

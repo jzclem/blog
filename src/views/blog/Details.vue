@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 600px" v-loading="loading">
+  <div v-loading="loading" style="min-height: 600px">
     <el-card shadow="never" style="min-height: 400px">
       <div slot="header">
         <el-row>
@@ -8,12 +8,12 @@
           </el-col>
           <el-col :span="12">
             <div style="text-align: right;">
-              <el-button @click="$share()" style="padding: 3px 0" type="text" icon="el-icon-share">分享</el-button>
-              <el-button @click="edit" style="padding: 3px 0" type="text" icon="el-icon-edit" v-if="token">编辑
+              <el-button icon="el-icon-share" style="padding: 3px 0" type="text" @click="$share()">分享</el-button>
+              <el-button v-if="token" icon="el-icon-edit" style="padding: 3px 0" type="text" @click="edit">编辑
               </el-button>
-              <el-button @click="deleteBlog" style="padding: 3px 0" type="text" icon="el-icon-delete" v-if="token">删除
+              <el-button v-if="token" icon="el-icon-delete" style="padding: 3px 0" type="text" @click="deleteBlog">删除
               </el-button>
-              <el-button style=" padding: 3px 0" type="text" icon="el-icon-more-outline" @click="more">更多博客</el-button>
+              <el-button icon="el-icon-more-outline" style=" padding: 3px 0" type="text" @click="more">更多博客</el-button>
             </div>
           </el-col>
         </el-row>
@@ -24,7 +24,7 @@
       <div style="font-size: 1.1rem;line-height: 1.5;color: #303133;border-bottom: 1px solid #E4E7ED;padding: 5px 0px 5px 0px">
         <pre style="font-family: '微软雅黑'">{{ blog.description }}</pre>
       </div>
-      <div v-html="blog.content" class="markdown-body" style="padding-top: 20px"></div>
+      <div class="markdown-body" style="padding-top: 20px" v-html="blog.content"></div>
     </el-card>
   </div>
 </template>
