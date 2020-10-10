@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="10">
         <div>
-          © 2019 &emsp;粤ICP备19052371号&emsp;
+          © 2020 &emsp;粤ICP备2020098280号&emsp;
           <a href="https://github.com/jzclem" target="_blank">jzclem</a>&emsp;&emsp;
           <a href="https://github.com/jzclem/blog" target="_blank">Blog</a>
         </div>
