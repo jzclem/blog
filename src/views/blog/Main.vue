@@ -13,11 +13,11 @@
         <div slot="header">
           <el-row>
             <el-col :span="16">
-                            <span>
-                                <a style="text-decoration:none;cursor:pointer" @click="goDetails(item.id)">
-                                    <i class="el-icon-edit-outline"></i>&nbsp;&nbsp; {{ item.title }}
-                                </a>
-                            </span>
+              <span>
+                <a style="text-decoration:none;cursor:pointer" @click="goDetails(item.id)">
+                  <i class="el-icon-edit-outline"></i>&nbsp;&nbsp; {{ item.title }}
+                </a>
+              </span>
             </el-col>
             <el-col :span="8">
               <div style="text-align: right;">
@@ -32,7 +32,7 @@
           </el-row>
         </div>
         <div style="font-size: 0.9rem;line-height: 1.5;color: #606c71;">
-          最近更新 {{ item.updateTime }}
+          最近更新 {{ item.update_time }}
         </div>
         <div style="font-size: 1.1rem;line-height: 1.5;color: #303133;padding: 10px 0px 0px 0px">
           {{ item.description }}
@@ -81,25 +81,12 @@
         this.blogs = []
         this.loading = true
         GistApi.list(this.query).then((response) => {
-          let result = response.data
+          let result = response.data.data
           let pageNumber = this.$util.parseHeaders(response.headers)
           if (pageNumber) {
             this.query.pageNumber = pageNumber
           }
-          for (let i = 0; i < result.length; i++) {
-            for (let key in result[i].files) {
-              let data = {}
-              data['title'] = key
-              data['url'] = result[i].files[key]
-              data['description'] = result[i]['description']
-              data['id'] = result[i]['id']
-              data['createTime'] = this.$util.utcToLocal(result[i]['created_at'])
-              data['updateTime'] = this.$util.utcToLocal(result[i]['updated_at'])
-              data['hide'] = false
-              this.blogs.push(data)
-              break
-            }
-          }
+          this.blogs = result
         }).then(() => this.loading = false)
       },
       search () {

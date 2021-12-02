@@ -27,7 +27,7 @@
       </van-row>
     </div>
     <div class="markdown-body" style="padding: 10px" v-html="project.content"></div>
-    <div style="height: 100px;"></div>
+    <div style="height: 75px;"></div>
   </div>
 </template>
 <script>

@@ -6,13 +6,13 @@
                  @click-right="$mobileShare()" />
     <div style="height: 60px;"></div>
     <router-link v-for="(item,index) in blogs" :key="'p'+index" :to="`/mobile/user/blog/details/${item.id}`">
-      <van-panel :desc="'更新时间 '+item.updateTime" :title="item.title" style="margin-bottom: 10px">
+      <van-panel :desc="'更新时间 '+item.update_time" :title="item.title" style="margin-bottom: 10px">
         <div style="padding: 7px 15px 7px 15px;color: #303133;font-size: 0.9rem">{{
             $util.cutStr(item.description, 50) }}
         </div>
       </van-panel>
     </router-link>
-    <div style="height: 100px;"></div>
+    <div style="height: 75px;"></div>
   </div>
 </template>
 <script>
@@ -46,30 +46,15 @@
           message: '加载中'
         })
         GistApi.list(this.query).then((response) => {
-          let result = response.data
+          let result = response.data.data
           let pageNumber = this.$util.parseHeaders(response.headers)
           if (pageNumber) {
             this.query.pageNumber = pageNumber
           }
           if (result.length == 0) {
-
             return
           }
-          for (let i = 0; i < result.length; i++) {
-            for (let key in result[i].files) {
-              let data = {}
-              data['title'] = key
-              data['url'] = result[i].files[key]
-              data['description'] = result[i]['description']
-              data['id'] = result[i]['id']
-              data['createTime'] = this.$util.utcToLocal(result[i]['created_at'])
-              data['updateTime'] = this.$util.utcToLocal(result[i]['updated_at'])
-              data['hide'] = false
-              this.blogs.push(data)
-              break
-            }
-          }
-          // this.query.page++
+          this.blogs = result
         }).then(() => this.$toast.clear())
       },
       search () {

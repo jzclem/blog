@@ -3,16 +3,12 @@ import Vue from 'vue'
 import store from '../store/index'
 
 const service = axios.create({
-  baseURL: '',
+  baseURL: 'https://api.github.com',
   timeout: 15000
 })
 
 service.interceptors.request.use(
   config => {
-    let token = store.state.token.token
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
     return config
   },
   error => {

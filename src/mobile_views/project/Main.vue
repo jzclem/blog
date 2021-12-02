@@ -25,7 +25,7 @@
         </div>
       </van-panel>
     </router-link>
-    <div style="height: 100px;"></div>
+    <div style="height: 75px;"></div>
   </div>
 </template>
 <script>

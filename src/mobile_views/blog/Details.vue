@@ -9,13 +9,13 @@
                  @click-right="$mobileShare()" />
     <div style="height: 60px;"></div>
     <div style="font-size: 0.9rem;line-height: 1.5;color: #606c71;padding: 10px 10px 0px 10px">
-      发布 {{ blog.createTime }} <br> 更新 {{ blog.updateTime }}
+      发布 {{ blog.create_date }} <br> 更新 {{ blog.update_date }}
     </div>
-    <div style="font-size: 1.0rem;line-height: 1.5;color: #303133;border-bottom: 1px solid #E4E7ED;padding: 0px 10px">
-      <pre style="font-family: '微软雅黑'">{{ blog.description }}</pre>
+    <div style="font-size: 0.9rem;line-height: 1.5;color: #303133;border-bottom: 1px solid #E4E7ED;padding: 10px">
+      {{ blog.description }}
     </div>
     <div class="markdown-body" style="padding: 10px" v-html="blog.content"></div>
-    <div style="height: 100px;"></div>
+    <div style="height: 75px;"></div>
   </div>
 </template>
 <script>
@@ -41,15 +41,10 @@
       })
       this.blog.id = this.$route.params.id
       GistApi.single(this.blog.id).then((response) => {
-        let result = response.data
-        for (let key in result.files) {
-          this.blog['title'] = key
-          this.blog['content'] = this.$markdown(result.files[key]['content'])
-          this.blog['description'] = result['description']
-          this.blog['createTime'] = this.$util.utcToLocal(result['created_at'])
-          this.blog['updateTime'] = this.$util.utcToLocal(result['updated_at'])
-          break
-        }
+        let result = response.data.data
+        this.blog = result
+        this.blog['create_date'] = this.$util.utcToLocal(result['create_date'])
+        this.blog['update_date'] = this.$util.utcToLocal(result['update_date'])
       }).then(() => this.$toast.clear())
     },
     methods: {}
