@@ -18,6 +18,7 @@ export default {
   },
   //yyyy-MM-ddThh-mm-ss.*
   utcToLocal (time) {
+    if (!time) return ''
     let formatNum = (num) => {
       return num >= 10 ? num : ('0' + num)
     }
