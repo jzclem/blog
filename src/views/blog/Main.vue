@@ -39,7 +39,7 @@
         </div>
       </el-card>
       <div style="text-align: center">
-        <el-pagination :current-page.sync="query.page" :page-size="query.pageSize" :total="query.pageNumber*query.pageSize" background
+        <el-pagination :current-page.sync="query.page" :page-size="query.pageSize" :total="total" background
                        layout="prev, pager, next"
                        @current-change="list">
         </el-pagination>
@@ -63,6 +63,7 @@
           pageSize: 5,
           pageNumber: 1
         },
+        total: 0,
         loading: false,
         searchKey: '',
         blogs: []
@@ -81,12 +82,11 @@
         this.blogs = []
         this.loading = true
         GistApi.list(this.query).then((response) => {
-          let result = response.data.data
-          let pageNumber = this.$util.parseHeaders(response.headers)
-          if (pageNumber) {
-            this.query.pageNumber = pageNumber
+          let { data, total, status } = response.data
+          if (status) {
+            this.total = total
+            this.blogs = data
           }
-          this.blogs = result
         }).then(() => this.loading = false)
       },
       search () {
@@ -95,13 +95,6 @@
         }
       },
       editBlog (index) {
-        // if (!this.token) {
-        //     this.$message({
-        //         message: '请绑定有效的Token',
-        //         type: 'warning'
-        //     })
-        //     return
-        // }
         this.$router.push('/user/blog/edit/' + this.blogs[index].id)
       },
       deleteBlog (index) {
@@ -121,13 +114,6 @@
         })
       },
       goAdd () {
-        // if (!this.token) {
-        //     this.$message({
-        //         message: '请绑定有效的Token',
-        //         type: 'warning'
-        //     })
-        //     return
-        // }
         this.$router.push('/user/blog/add')
       },
       goDetails (id) {
