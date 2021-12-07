@@ -32,7 +32,6 @@ const configuration = {
 
       state.backgroundColorRight = configuration['backgroundColorRight'] || '#159957'
 
-      //http://sc1.111ttt.cn:8282/2018/1/03m/13/396131232171.m4a?tflag=1519095601&pin=6cd414115fdb9a950d827487b16b5f97#.mp3
       state.audioUrl = configuration['audioUrl'] || ''
 
       state.mini = configuration['mini'] || false
@@ -54,7 +53,7 @@ const configuration = {
       } else {
         xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
       }
-      xmlhttp.open('GET', '../../../static/configuration.json', false)
+      xmlhttp.open('GET', '../../../static/configuration.json', true)
       xmlhttp.send()
       let configuration = JSON.parse(xmlhttp.responseText)
       commit('SET_CONFIGURATION', configuration)

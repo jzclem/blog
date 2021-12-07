@@ -28,7 +28,7 @@
       }
     },
     mounted () {
-      document.title = `被发现啦(*´∇｀*)`
+      document.title = `hello~`
       let visProp = this.getHiddenProp()
       this.evtname = visProp.replace(/[H|h]idden/, '') + 'visibilitychange'
       document.addEventListener(this.evtname, this.visibilityChange, false)
@@ -63,11 +63,11 @@
       visibilityChange () {
         switch (document[this.getVisibilityState()]) {
           case 'visible':
-            document.title = `被发现啦(*´∇｀*)`
+            document.title = `hello~`
             break
           case 'hidden':
           default:
-            document.title = `藏好啦(つд⊂)`
+            document.title = `hi~~`
             break
         }
       }
