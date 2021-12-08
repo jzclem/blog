@@ -26,7 +26,6 @@
           description: ''
         }
       }
-
     },
     mounted () {
       this.$toast.loading({
@@ -43,7 +42,6 @@
       }).then(() => this.$toast.clear())
     },
     methods: {}
-
   }
 </script>
 

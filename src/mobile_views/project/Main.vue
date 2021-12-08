@@ -15,6 +15,7 @@
           <van-row>
             <van-col span="12" style="font-size: 0.8rem;padding-top: 4px;color: #606266">
               <van-icon name="like" />&nbsp;{{ item.stargazersCount }}&emsp;
+              <van-icon name="description" />&nbsp;{{ item.watchersCount }}&emsp;
               <van-icon name="coupon" />&nbsp;{{ item.forksCount }}
             </van-col>
             <van-col span="12" style="text-align: right">

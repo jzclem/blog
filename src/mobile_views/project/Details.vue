@@ -4,20 +4,17 @@
                  left-arrow
                  left-text="返回"
                  right-text="分享"
-                 style="position:fixed;top:0;z-index: 9999; box-shadow: 0px -5px 10px #888888;width: 100%;"
+                 class="nav"
                  @click-left="$router.go(-1)"
                  @click-right="$mobileShare()" />
     <div style="height: 60px;"></div>
-    <div style="font-size: 0.9rem;line-height: 1.5;color: #606c71;padding: 10px">
-      发布 {{ project.createTime }} <br> 更新 {{ project.updateTime }}
-    </div>
-    <div style="font-size: 1.0rem;line-height: 1.5;color: #303133;padding: 10px">
-      {{ project.description }}
-    </div>
-    <div style="padding: 0px 15px 5px 15px;color: #606266;border-bottom: 1px solid #E4E7ED;">
+    <div class="time">发布 {{ project.createTime }} <br> 更新 {{ project.updateTime }}</div>
+    <div class="content">{{ project.description }}</div>
+    <div class="main">
       <van-row>
         <van-col span="12" style="font-size: 0.8rem;padding-top: 4px;color: #606266">
           <van-icon name="like" />&nbsp;{{ project.stargazersCount }}&emsp;
+          <van-icon name="description" />&nbsp;{{ project.watchersCount }}&emsp;
           <van-icon name="coupon" />&nbsp;{{ project.forksCount }}
         </van-col>
         <van-col span="12" style="text-align: right">
@@ -26,7 +23,7 @@
         </van-col>
       </van-row>
     </div>
-    <div class="markdown-body" style="padding: 10px" v-html="project.content"></div>
+    <div class="markdown-body" v-html="project.content"></div>
     <div style="height: 75px;"></div>
   </div>
 </template>
@@ -71,3 +68,37 @@
     methods: {}
   }
 </script>
+
+<style scoped>
+  .nav {
+    position:fixed;
+    top:0;
+    z-index: 9999;
+    box-shadow: 0px -5px 10px #888888;
+    width: 100%;
+  }
+  .time {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #606c71;
+    padding: 10px 10px 0px 10px;
+  }
+  .content {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #303133;
+    border-bottom: 1px solid #E4E7ED;
+    padding: 10px;
+  }
+  .main {
+    padding: 0px 15px 5px 15px;
+    color: #606266;
+    border-bottom: 1px solid #E4E7ED;
+  }
+  .markdown-body {
+    padding: 10px;
+  }
+  /deep/ .markdown-body img {
+    height: auto!important;
+  }
+</style>
