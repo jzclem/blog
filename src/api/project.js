@@ -23,7 +23,6 @@ export default {
       data: {
         'message': 'a',
         'content': require('js-base64').Base64.encode(content),
-
         'sha': sha
       }
     })
@@ -31,8 +30,7 @@ export default {
   list: function (query) {
     let githubUsername = store.state.configuration.githubUsername
     return request({
-      url: `/users/${githubUsername}/repos?page=${query.page}&per_page=${query.pageSize}`
-
+      url: `/users/${githubUsername}/repos?page=${query.page}&per_page=${query.pageSize}&sort=updated`
     })
   },
   single: function (name) {
